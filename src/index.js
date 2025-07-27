@@ -19,7 +19,7 @@ function makePoem(event) {
   let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
   poemElement.classList.remove("hidden");
-  poemElement.innerHTML = `Generating poem about <strong>${instructionsInput.value}</strong><span class="loading-dots"><span>.</span><span>.</span><span>.</span>
+  poemElement.innerHTML = `Generating poem about "<strong>${instructionsInput.value}</strong>"<span class="loading-dots"><span>.</span><span>.</span><span>.</span>
   </span>`;
 
   //build API URL
