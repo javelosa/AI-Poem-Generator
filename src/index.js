@@ -1,12 +1,30 @@
-function makePoem(event) {
-  event.preventDefault();
-
+function displayPoem(response) {
+  console.log("poem generated");
   new Typewriter("#poem-content", {
-    strings: ["To be or not to be."],
+    strings: response.data.answer,
     autoStart: true,
     delay: 10,
     cursor: "",
   });
+}
+
+function makePoem(event) {
+  event.preventDefault();
+
+  let instructionsInput = document.querySelector("#topic-instructions");
+  let apiKey = "04a6b97ba438oct66060d748685ff445";
+  let context =
+    "You are an AI poet and everytime gives you a topic, you tell a five line poem about the topic. Separate each line with a <br />. Make sure to follow the topic instructions.";
+  let prompt = `Topic instructions: Generate a poem about ${instructionsInput.value}.`;
+  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+  console.log("Generating poem");
+  console.log(`Prompt: ${prompt}`);
+  console.log(`Context: ${context}`);
+  //build API URL
+  //Make a call to the API
+  axios.get(apiUrl).then(displayPoem);
+  //Display the generate poem
 }
 
 let poemFormElement = document.querySelector("#poem-creator");
